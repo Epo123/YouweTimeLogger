@@ -17,12 +17,38 @@ public class TimeCardHeaderBuilder {
             return this.createIssueCodeTimeCard(inputLine);
         }
 
+        headerMatch = isTimeCardHeaderWithMessage(inputLine);
+        if(headerMatch) {
+            System.out.println(inputLine + "Detected isTimeCardHeaderWithMessage");
+            return this.createTimeCardWithMessage(inputLine);
+        }
+
         headerMatch = isTimeCardHeader(inputLine);
         if(headerMatch) {
             System.out.println(inputLine + " Detected isTimeCardHeader");
             return this.createTimeCard(inputLine);
         }
         throw new Exception("Unable to build this kind of timecard.");
+    }
+
+    private TimeCard createTimeCardWithMessage(String inputLine) {
+        TimeCard timeCard = new TimeCard();
+        Pattern pattern = Pattern.compile("(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<message>.+)");
+        Matcher matcher = pattern.matcher(inputLine);
+        matcher.find();
+
+        timeCard.setStartTime(matcher.group("startTime"));
+        timeCard.setEndTime(matcher.group("endTime"));
+        timeCard.setHeaderMessage(matcher.group("message"));
+        timeCard.setHeaderIsSet(true);
+
+        return timeCard;
+    }
+
+    private boolean isTimeCardHeaderWithMessage(String inputLine) {
+        Pattern pattern = Pattern.compile("(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<message>.+)");
+        Matcher matcher = pattern.matcher(inputLine);
+        return matcher.find();
     }
 
     private TimeCard createTimeCard(String inputLine) {
