@@ -33,7 +33,7 @@ public class TimeCardHeaderBuilder {
 
     private TimeCard createTimeCardWithMessage(String inputLine) {
         TimeCard timeCard = new TimeCard();
-        Pattern pattern = Pattern.compile("(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<message>.+)");
+        Pattern pattern = Pattern.compile("^(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<message>.+)");
         Matcher matcher = pattern.matcher(inputLine);
         matcher.find();
 
@@ -46,14 +46,14 @@ public class TimeCardHeaderBuilder {
     }
 
     private boolean isTimeCardHeaderWithMessage(String inputLine) {
-        Pattern pattern = Pattern.compile("(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<message>.+)");
+        Pattern pattern = Pattern.compile("^(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<message>.+)");
         Matcher matcher = pattern.matcher(inputLine);
         return matcher.find();
     }
 
     private TimeCard createTimeCard(String inputLine) {
         TimeCard timeCard = new TimeCard();
-        Pattern pattern = Pattern.compile("(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+)");
+        Pattern pattern = Pattern.compile("^(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+)");
         Matcher matcher = pattern.matcher(inputLine);
         matcher.find();
 
@@ -65,7 +65,7 @@ public class TimeCardHeaderBuilder {
     }
 
     public boolean isTimeCardHeader(String inputLine) {
-        Pattern pattern = Pattern.compile("(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+)");
+        Pattern pattern = Pattern.compile("^(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+)");
         Matcher matcher = pattern.matcher(inputLine);
         boolean headerMatch = matcher.find();
         return headerMatch;
@@ -73,7 +73,7 @@ public class TimeCardHeaderBuilder {
 
     private TimeCard createIssueCodeTimeCard(String inputLine) {
         TimeCard timeCard = new TimeCard();
-        Pattern pattern = Pattern.compile("(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<issueCode>[A-Za-z]+\\d*-\\d+)");
+        Pattern pattern = Pattern.compile("^(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<issueCode>[A-Za-z]+\\d*-\\d+)");
         Matcher matcher = pattern.matcher(inputLine);
         matcher.find();
 
@@ -86,7 +86,7 @@ public class TimeCardHeaderBuilder {
     }
 
     private boolean isIssueCodeHeader(String inputLine) {
-        Pattern pattern = Pattern.compile("(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<issueCode>[A-Za-z]+\\d*-\\d+)");
+        Pattern pattern = Pattern.compile("^(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<issueCode>[A-Za-z]+\\d*-\\d+)");
         Matcher matcher = pattern.matcher(inputLine);
         boolean headerMatch = matcher.find();
         return headerMatch;
@@ -94,7 +94,7 @@ public class TimeCardHeaderBuilder {
 
     private TimeCard createIssueCodeHeaderWithMessageTimeCard(String inputLine) {
         TimeCard timeCard = new TimeCard();
-        Pattern pattern = Pattern.compile("(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<issueCode>[A-Za-z]+\\d*-\\d+) - (?<message>.+)");
+        Pattern pattern = Pattern.compile("^(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<issueCode>[A-Za-z]+\\d*-\\d+) - (?<message>.+)");
         Matcher matcher = pattern.matcher(inputLine);
         matcher.find();
 
@@ -108,7 +108,7 @@ public class TimeCardHeaderBuilder {
     }
 
     private boolean isIssueCodeHeaderWithMessage(String inputLine) {
-        Pattern pattern = Pattern.compile("(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<issueCode>[A-Za-z]+\\d*-\\d+) - (?<message>.+)");
+        Pattern pattern = Pattern.compile("^(?<startTime>\\d+:\\d+) - (?<endTime>\\d+:\\d+) - (?<issueCode>[A-Za-z]+\\d*-\\d+) - (?<message>.+)");
         Matcher matcher = pattern.matcher(inputLine);
         boolean headerMatch = matcher.find();
         return headerMatch;

@@ -64,6 +64,7 @@ public class App {
                         .append(timeCard.getHeaderMessage())
                         .append("\n");
             }
+            totalDurationPerGroup += report.get(report.size() - 1).getDurationTotal();
             output.append("\n").append(lastIssueCode).append(" - ").append("Total duration: ").append(totalDurationPerGroup).append("\n\n");
             this.output.setText(this.output.getText() + output.toString());
         } catch (Exception e) {
