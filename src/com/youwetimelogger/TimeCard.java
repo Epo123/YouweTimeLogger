@@ -87,6 +87,26 @@ public class TimeCard {
         return "";
     };
 
+    public String getDurationJiraMinutes() {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+
+        try {
+            Date startTime = format.parse(this.startTime);
+            Date endTime = format.parse(this.endTime);
+
+            long diff = endTime.getTime() - startTime.getTime();
+            long diffMinutes = diff / (60 * 1000) % 60;
+            long diffHours = diff / (60 * 60 * 1000);
+            double diffJiraMinutes =  ((double) diffMinutes / (double) 60) * (double) 100;
+
+            return diffHours + "." + (int) diffJiraMinutes;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    };
+
     public String getHeaderMessage() {
         return headerMessage;
     }

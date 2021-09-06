@@ -57,7 +57,7 @@ public class App {
                     totalDurationPerGroup = 0.0;
                     lastIssueCode = timeCard.getIssueCode();
                 }
-                output.append(timeCard.getDuration()).append(" - ")
+                output.append(timeCard.getDurationJiraMinutes()).append(" - ")
                         .append(timeCard.getStartTime()).append(" - ")
                         .append(timeCard.getEndTime()).append(" - ")
                         .append(timeCard.getIssueCode()).append(" - ")
