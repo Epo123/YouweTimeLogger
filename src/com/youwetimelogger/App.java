@@ -48,14 +48,14 @@ public class App {
             String lastIssueCode = "";
             Double totalDurationPerGroup = 0.0;
             for (TimeCard timeCard: report) {
-                totalDurationPerGroup += timeCard.getDurationTotal();
-
                 if (timeCard.getIssueCode() != null &&
                         !timeCard.getIssueCode().equalsIgnoreCase(lastIssueCode)
                 ) {
                     output.append("\n").append(lastIssueCode).append(" - ").append("Total duration: ").append(totalDurationPerGroup).append("\n\n");
-                    totalDurationPerGroup = 0.0;
+                    totalDurationPerGroup = timeCard.getDurationTotal();
                     lastIssueCode = timeCard.getIssueCode();
+                } else {
+                    totalDurationPerGroup += timeCard.getDurationTotal();
                 }
                 output.append(timeCard.getDurationJiraMinutes()).append(" - ")
                         .append(timeCard.getStartTime()).append(" - ")
@@ -64,7 +64,6 @@ public class App {
                         .append(timeCard.getHeaderMessage())
                         .append("\n");
             }
-            totalDurationPerGroup += report.get(report.size() - 1).getDurationTotal();
             output.append("\n").append(lastIssueCode).append(" - ").append("Total duration: ").append(totalDurationPerGroup).append("\n\n");
             this.output.setText(this.output.getText() + output.toString());
         } catch (Exception e) {
